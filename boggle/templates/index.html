@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Boggle</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div><h1>Boggle!</h1></div>
+    <div><p>Find as many words as they can in the grid, according to the following rules: 
+        The letters must be adjoining in a 'chain'. (Letter cubes in the chain may be adjacent 
+        horizontally, vertically, or diagonally.) Words must contain at least three letters.</p></div>
+
+ <section id="boggle">
+    <div id="boggle-div">
+      <table class="board">
+        <tbody>
+          {% for row in board %}
+          <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+       </section>
+
+    <div>
+      <p>High Score: 
+        <b>{{ highscore }}</b> 
+        in {{ nplays }} plays
+      </p>
+
+      <p>
+        Score: <b class="score">0</b>
+        Seconds Left: <b class="timer"></b>
+      </p>
+    </div>  
+
+    <div>
+      <form method="POST" class="add-word">
+        <label for="word">Enter your guess!</label>
+        <input name="word" class="word" autofocus>
+        <button>Enter</button>
+      </form>
+    </div>    
+        <p class="msg">
+        <!-- our JS will put messages here dynamically -->
+      </p>
+
+      <ul class="words">
+        <!-- our JS will words here as they score -->   
+      </ul>
+
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/boggle.js"></script>
+    <script>
+      let game = new BoggleGame("boggle", 60);
+    </script>
+  </body>
+</html>
